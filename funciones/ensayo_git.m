@@ -1,1 +1,1 @@
-% Nueva confguración en Git
+% Yo te dije que trabajar con Karen era como tener un hueco vacío
