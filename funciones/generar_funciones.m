@@ -19,6 +19,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             
             % plot(app.UIAxes, app.x_in(:,1), 'v');
    
+            
             sample_rate = t;
     
     
