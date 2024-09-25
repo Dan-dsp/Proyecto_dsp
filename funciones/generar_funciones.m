@@ -183,6 +183,6 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             title(axes, 'Señal Estereofónica: Canal 1');
             xlabel(axes, 'n');
             grid(axes, 'on');
-     end
+    end
 end
 
