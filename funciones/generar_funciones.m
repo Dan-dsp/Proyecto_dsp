@@ -1,4 +1,4 @@
-function  [x, sample_rate] = generar_funciones(axes, value)
+function  [x, t, sample_rate] = generar_funciones(axes, value)
     switch value
         case 'Chirp'
             dlgtitle = 'Chirp Signal Parameters';
@@ -21,7 +21,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
    
             
             sample_rate = Fs;
-    
+            
     
             stem(axes, t, x);
             title(axes, 'Señal Estereofónica: Canal 1');
@@ -34,7 +34,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','20','44100','0','0', '0', '50'};
+            defect_input = {'1','4410','44100','0','0', '0', '50000'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
@@ -53,9 +53,12 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             Ts=1/Fs; %Periodo de muestreo
             
             n6=ni:nf; %Instantes de tiempo
+            
+            t = n6*Ts; % Time vector en segundos dependiente del tiempo de muestreo
+
             variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
             result = 2*pi*Fa/Fs+ Fase
-            x= A*[sin(2*pi*Fa*(n6-n0)/Fs+ Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
+            x= A*[sin(2*pi*Fa*t + Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
 
@@ -94,8 +97,9 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             x = A*[cos(2*pi*Fa*(n6-n0)/Fs+ Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
+            t = n6;
 
-            stem(axes, n6,x);
+            stem(axes, t,x);
             title(axes, 'Señal Estereofónica: Canal 1');
             xlabel(axes, 'n');
             grid(axes, 'on');
@@ -129,6 +133,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             x = A * sawtooth(2 * pi * Fa * (n6 - n0) / Fs + Fase);
             
             sample_rate = Fs;
+            t = n6;
 
             stem(axes, n6,x);
             title(axes, 'Diente de sierra');
@@ -154,6 +159,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             x =A*(n3-n0);
             
             sample_rate = Fs;
+            t = n3;
             
             stem(axes, n3,x);
             % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
@@ -179,6 +185,7 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             n2=ni:nf;  % Instantes de tiempo
             
             sample_rate = Fs;
+            t = n2;
         
             stem(axes, n2,x);
             % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
@@ -186,6 +193,6 @@ function  [x, sample_rate] = generar_funciones(axes, value)
             xlabel(axes, 'n');
             grid(axes, 'on');
     end
-    disp(['Sample rate:', num2str(Fs), 'Hz']);
+    % disp(['Sample rate:', num2str(Fs), 'Hz']);
 end
 
