@@ -19,7 +19,6 @@ function [x_normalized] = normalizacion(x)
     disp('You are using the normalize function');
     % Normalizar señal de audio entre -1 y 1
     x_normalized = (2*(x-min(x))/(max(x)-min(x)))-1;
-    x_normalized = x;
 end
 
 function [x_non_missing_values] = missing_values(x)
