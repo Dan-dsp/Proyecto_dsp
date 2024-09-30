@@ -6,9 +6,11 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         case 'desplazar'
             signal = desplazar(signal, sample_rate);
         case 'sumar'
-            a
+            [signal_2, sample_rate_2] = import_signal();
+            signal = sumar(signal, signal_2);
         case 'multiplicar'
-            a
+            [signal_2, sample_rate_2] = import_signal();
+            signal = multiplicar(signal, signal_2);
         case 'inversa'
             a
         case 'estereo a mono'
@@ -32,10 +34,16 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
     end
     
     function new_sample_rate = change_sample_rate()
-    
+        dlgtitle = 'Cambio en la frecuencia de muestreo';
+        prompt = {'Nueva frecuencia de muestreo'};
+        dims = [1 35];
+        defect_input = {'48000'};
+        answer = inputdlg(prompt,dlgtitle,dims,defect_input);
+        new_sample_rate = str2num(answer{1});
     end
     
     function shifted_signal = desplazar(signal, sample_rate)
+ 
         % shiftSignalForLoops: Shifts a signal by a specified number of samples or seconds using for loops
         % signal: The original signal to be shifted
         % shiftValue: The number of samples to shift or time in seconds to shift.
@@ -93,5 +101,16 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
             shifted_signal = signal;
         end
     end
+
+    function sumar(signal, signal_2)
+
+        a
+    end
+
+    function multiplicar(signal, signal_2)
+        a
+    end
+
+
 end
 
