@@ -13,9 +13,9 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
             signal = multiplicar(signal, signal_2);
         case 'inversa'
             signal = invertir_senal(signal);
-        case 'estereo a mono'
-            a
         case 'mono a estereo'
+            signal = stereo_from_mono(signal, signal_2, sample_rate);
+        case 'estereo a mono'
             a
         case 'estereo con dos monos'
             a
@@ -138,6 +138,22 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
     function signal = invertir_senal(signal)
         % Reverse the order of the signal
         signal = signal(end:-1:1);
+    end
+
+    function signal = stereo_from_mono(signal_1, signal_2)
+        % Equalize lengths by padding the shorter signal with zeros
+        len1 = length(signal_1);
+        len2 = length(signal_2);
+        
+        if len1 > len2
+            signal_2 = [signal_2, zeros(1, len1 - len2)];
+        elseif len2 > len1
+            signal_1 = [signal_1, zeros(1, len2 - len1)];
+        end
+    
+        % Combine the two mono signals into a stereo signal using the
+        % transpose
+        signal = [signal_1.' signal_2.'];
     end
 
 end
