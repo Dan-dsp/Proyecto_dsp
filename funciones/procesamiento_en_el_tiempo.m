@@ -19,18 +19,70 @@ function signal = procesamiento_en_el_tiempo(tipo_de_procesamiento)
     end
 end
 
-    function signal = desplazar()
+
+function shifted_signal = desplazar()
+    % shiftSignalForLoops: Shifts a signal by a specified number of samples or seconds using for loops
+    % signal: The original signal to be shifted
+    % shiftValue: The number of samples to shift or time in seconds to shift.
+    % Fs: The sampling frequency in Hz.
+    % isTimeShift: A boolean indicating if 'shiftValue' is in seconds (true) or samples (false).
+    
+    % Busca el archivo que se quiere importar
+    [filename, path] = uigetfile({'*.mp3;*.wav'}); 
+    % figure(app.UIFigure);
+    fullFileName = fullfile(path, filename);  % Construye la ruta completa del archivo
+    
+    % Recuperar los datos importados
+    [signal, sample_rate] = audioread(fullFileName);
+
+
     dlgtitle = 'Desplazar señal';
-    prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duración de la señal:'};
+    prompt = {'Valor del desplazamiento', '0 para desplazamiento a la izquierda o 1 para desplazamiento a la derecha', '0 para desplazamiento por muestra o 1 para desplazamiento en segundos'};
     dims = [1 35];
-    defect_input = {'1','100','22050','44100','2'};
+    defect_input = {'1','0','1'};
     answer = inputdlg(prompt,dlgtitle,dims,defect_input);
     
+    
+    shift_value = str2num(answer{1});    % Valor del desplazamiento
+    left_right_shifting = str2num(answer{2});    % Sentido del desplazamiento
+    sample_second_shifting = str2num(answer{3});    % Referencia del desplazamiento: si en muestras o en segundos
 
-    A = str2num(answer{1});    % Amplitude of the chirp
-    f0 = str2num(answer{2});    % Initial frequency in Hz
-    f1 = str2num(answer{3});    % Final frequency in Hz
-    Fs = str2num(answer{4});    % Sampling frequency in Hz
-    T = str2num(answer{5});    % Duration of the signal in seconds
-
+    
+    % Convert shift value from time (seconds) to samples if necessary
+    if sample_second_shifting
+        % Convert seconds to number of samples
+        shift_value = round(shift_value * sample_rate);
+    else
+        % Use the given number of samples directly
+    end
+    
+    % Get the length of the original signal
+    signalLength = length(signal);
+    
+    % Adjust length for the shifted signal depending on the direction of the shift
+    
+    if left_right_shifting == 0
+        % Advance: Add additional space to the left (beginning)
+        shiftedSignalLength = signalLength + shift_value;
+        shifted_signal = zeros(1, shiftedSignalLength);
+        
+        % Fill the shifted signal using the for loop
+        for i = 1:signalLength
+            shifted_signal(i) = signal(i);
+        end
+    
+    elseif left_right_shifting == 1
+        % Delay: Add additional space to the right (end)
+        shiftedSignalLength = signalLength + shift_value;
+        shifted_signal = zeros(1, shiftedSignalLength);
+        
+        % Fill the shifted signal using the for loop
+        for i = 1:signalLength
+            shifted_signal(i + shift_value) = signal(i);
+        end
+    
+    else
+        % No shift: Simply copy the original signal
+        shifted_signal = signal;
+    end
 end
