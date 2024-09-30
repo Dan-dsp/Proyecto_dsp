@@ -21,14 +21,14 @@ function [x_normalized] = normalizacion(x)
     x_normalized = (2*(x-min(x))/(max(x)-min(x)))-1;
 end
 
-function [x_normalized] = normalizacion_zero(x)
+function [x_normalized] = normalizacion_positive(x)
     disp('You are using the normalize function');
     % Normalizar señal de audio entre -1 y 1
-    x_normalized = (2*(x-min(x))/(max(x)-min(x)));
+    x_normalized = (x-min(x))/(max(x)-min(x));
 end
 
 function [x_normalized] = normalizacion_standar(x)
-    x_normalized = (x-x); % I am hereeeeeeeeeeeeeeeeeeeeee
+    x_normalized = (x-mean(x))/std(x);
 end
 
 function [x_non_missing_values] = missing_values(x)

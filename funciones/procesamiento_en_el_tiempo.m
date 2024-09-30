@@ -140,7 +140,7 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         signal = signal(end:-1:1);
     end
 
-    function signal = stereo_from_mono(signal_1, signal_2)
+    function stereo_signal = stereo_from_mono(signal_1, signal_2)
         % Equalize lengths by padding the shorter signal with zeros
         len1 = length(signal_1);
         len2 = length(signal_2);
@@ -153,7 +153,33 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
     
         % Combine the two mono signals into a stereo signal using the
         % transpose
-        signal = [signal_1.' signal_2.'];
+        stereo_signal = [signal_1.' signal_2.'];
+    end
+
+    function mono_signal = mono_from_stereo(stereo_signal, sample_rate)
+
+        % Mono from stereo - Converts a stereo signal to a monophonic signal
+        % stereoSignal: A two-column matrix representing a stereo audio signal
+    
+        % Check if the input is a stereo signal: it must have two columns
+        if size(stereo_signal, 2) ~= 2
+            error('Input must be a stereo signal with two channels');
+        end
+    
+        % Average the left and right channels to create a mono signal
+        % The mean function in this case create a mean value between the
+        % two column-values for each line
+        mono_signal = mean(stereoSignal, 2);
+    
+        % Play the mono signal
+        % sound(monoSignal, sample_rate); % Assuming 44100 Hz sample rate
+    
+        % Plot the mono signal for visualization
+        % figure;
+        % plot(monoSignal);
+        % title('Monophonic Signal');
+        % xlabel('Samples');
+        % ylabel('Amplitude');
     end
 
 end
