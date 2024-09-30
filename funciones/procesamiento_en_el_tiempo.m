@@ -12,7 +12,7 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
             [signal_2, sample_rate_2] = import_signal();
             signal = multiplicar(signal, signal_2);
         case 'inversa'
-            a
+            signal = invertir_senal(signal);
         case 'estereo a mono'
             a
         case 'mono a estereo'
@@ -102,15 +102,43 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         end
     end
 
-    function sumar(signal, signal_2)
-
-        a
+    function signal = sumar(signal1, signal2)
+        % Determine the length of each signal
+        len1 = length(signal1);
+        len2 = length(signal2);
+    
+        % Equalize lengths by padding with zeros
+        if len1 > len2
+            signal2 = [signal2, zeros(1, len1 - len2)];
+        elseif len2 > len1
+            signal1 = [signal1, zeros(1, len2 - len1)];
+        end
+    
+        % Sum the two signals
+        signal = signal1 + signal2;
     end
 
-    function multiplicar(signal, signal_2)
-        a
+    function signal = multiplicar(signal1, signal2)
+        % Determine the length of each signal
+        len1 = length(signal1);
+        len2 = length(signal2);
+    
+        % Equalize lengths by padding with zeros
+        if len1 > len2
+            signal2 = [signal2, zeros(1, len1 - len2)];
+        elseif len2 > len1
+            signal1 = [signal1, zeros(1, len2 - len1)];
+        end
+    
+        % Multiply the two signals element-wise
+        signal = signal1 .* signal2;
+    
     end
-
+    
+    function signal = invertir_senal(signal)
+        % Reverse the order of the signal
+        signal = signal(end:-1:1);
+    end
 
 end
 
