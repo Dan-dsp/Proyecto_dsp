@@ -12,11 +12,13 @@ function [x_processed] = preprocesamiento(x, case_variable)
     end
 
     switch case_variable
-        case 'norm -1 to 1'
+        case '-------'
+            pass;
+        case 'Between -1 y 1'
             x_processed = normalizacion(x, num_rows, num_columns);
-        case 'norm 0 to 1'
+        case 'Between 0 and 1'
             x_processed = normalizacion_positive(x, num_rows, num_columns);
-        case 'norm standard'
+        case 'Standard normalization'
             x_processed = normalizacion_standard(x, num_rows, num_columns);
     end
 
