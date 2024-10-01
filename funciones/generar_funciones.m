@@ -4,7 +4,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Chirp Signal Parameters';
             prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duración de la señal:'};
             dims = [1 35];
-            defect_input = {'1','100','5000','44100','2'};
+            defect_input = {'1','100','1000','44100','2'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
     
