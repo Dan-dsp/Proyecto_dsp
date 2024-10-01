@@ -34,7 +34,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','4410','44100','0','0', '0', '50000'};
+            defect_input = {'1','100','44100','0','0', '0', '50000'};
             answer = inputdlg(prompt, dlgtitle, dims, defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
@@ -73,7 +73,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','2205','44100','0','0', '0', '50000'};
+            defect_input = {'1','100','44100','0','0', '0', '50000'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
