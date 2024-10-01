@@ -13,7 +13,7 @@ function [x_processed] = preprocesamiento(x, case_variable)
 
     switch case_variable
         case '-------'
-            pass;
+            x_processed = x;
         case 'Between -1 y 1'
             x_processed = normalizacion(x, num_rows, num_columns);
         case 'Between 0 and 1'
