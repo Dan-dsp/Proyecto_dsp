@@ -52,7 +52,7 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         dlgtitle = 'Desplazar señal';
         prompt = {'Valor del desplazamiento', '0 para desplazamiento a la izquierda o 1 para desplazamiento a la derecha', '0 para desplazamiento por muestra o 1 para desplazamiento en segundos'};
         dims = [1 35];
-        defect_input = {'1','0','1'};
+        defect_input = {'1','1','1'};
         answer = inputdlg(prompt,dlgtitle,dims,defect_input);
         
         
