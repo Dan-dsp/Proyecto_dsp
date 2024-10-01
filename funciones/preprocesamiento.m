@@ -1,4 +1,4 @@
-function [x_processed] = preprocesamiento(x)
+function [x_processed] = preprocesamiento(x, case_variable)
 
     [num_rows, num_columns] = size(x);
     type_of_signal = strings(1);
@@ -11,9 +11,20 @@ function [x_processed] = preprocesamiento(x)
         disp('Your signal is neither stereo nor mono');
     end
 
+    switch case_variable
+        case 'norm -1 to 1'
+            x_processed = normalizacion(x, num_rows, num_columns);
+        case 'norm 0 to 1'
+            x_processed = normalizacion_positive(x, num_rows, num_columns);
+        case 'norm standard'
+            x_processed = normalizacion_standard(x, num_rows, num_columns);
+    end
+
+    % x_processed = missing_values(x_processed, num_rows, num_columns);
+
     %Se realiza la normalización
     % x_normalized = normalizacion(x);
-    x_processed = normalizacion(x, num_rows, num_columns);
+    
 
     % Se detectan y eliminan los datos faltantes, se registran solo los
     % datos que sean número & se eliminan los que sean infinitos
@@ -30,7 +41,7 @@ function [x_processed] = preprocesamiento(x)
 end
 
 function [x_normalized] = normalizacion(x, num_rows, num_columns)
-    disp('You are using the normalize function');
+    disp('You are using the normalize function -1 to 1');
     % Normalizar señal de audio entre -1 y 1
     x_normalized = zeros(num_rows, num_columns);
 
@@ -39,43 +50,46 @@ function [x_normalized] = normalizacion(x, num_rows, num_columns)
     end
 end
 
-function [x_normalized] = normalizacion_positive(x)
-    disp('You are using the normalize function');
+function [x_normalized] = normalizacion_positive(x, num_rows, num_columns)
+    disp('You are using the normalize function 0 to 1');
     % Normalizar señal de audio entre -1 y 1
-    x_normalized = (x-min(x))/(max(x)-min(x));
+    x_normalized = zeros(num_rows, num_columns);
+
+    for i = 1:num_columns
+        x_normalized(:,i) = (x(:,i)-min(x(:,i)))/(max(x(:,i))-min(x(:,i)));
+    end
 end
 
-function [x_normalized] = normalizacion_standar(x)
-    x_normalized = (x-mean(x))/std(x);
+function [x_normalized] = normalizacion_standard(x, num_rows, num_columns)
+    disp('You are using the normalize standard function');
+    % Normalizar señal de audio entre -1 y 1
+    x_normalized = zeros(num_rows, num_columns);
+
+    for i = 1:num_columns
+        x_normalized(:,i) = (x(:,i)-mean(x(:,i)))/std(x(:,i));
+    end
+    
 end
 
-function [x_non_missing_values] = missing_values(x)
+function [x_non_missing_values] = missing_values(x, num_rows, num_columns)
     disp('You are using the missing_values function');
 
     % Initialize an empty array to store non-missing values
-    outputArray = zeros(1, length(x));
+    x_temp_array = zeros(num_rows, num_columns);
     % Creates a variable to track the new length of the vector
-    new_length = 0;
-    
-    % Loop through the input array to filter out missing values
-    for i = 1:length(x)
-        if (~isnan(x(i))) || (x(i) ~= Inf)
-            % Append the non-missing value to the output array
-            outputArray(i) = x(i);
-            % Vector's length tracking
-            new_length = new_length + 1;
+    new_length_i = 0;
+    for j = 1:num_columns    
+        % Loop through the input array to filter out missing values
+        for i = 1:num_rows
+            if (~isnan(x(i, j))) || (x(i,j) ~= Inf)
+                % Append the non-missing value to the output array
+                x_temp_array(i, j) = x(i, j);
+                % Vector's length tracking
+                new_length_i = new_length_i + 1;
+            end
         end
     end
     % Assignement of the new vector with the new vector's length
-    x_non_missing_values = outputArray(1:new_length);
+    x_non_missing_values = x_temp_array(1:new_length_i, 1:num_columns);
 end
 
-% function [x_are_only_numbers] = not_a_number(x)
-%     disp('You are using the not a number function');
-%     x_are_only_numbers = x;
-% end
-% 
-% function [x_finite] = infinite_values(x)
-%     disp('You are using the infinite function');
-%     x_finite = x;
-% end
