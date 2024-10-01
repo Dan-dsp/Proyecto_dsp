@@ -33,6 +33,7 @@ function [x_normalized] = normalizacion(x, num_rows, num_columns)
     disp('You are using the normalize function');
     % Normalizar señal de audio entre -1 y 1
     x_normalized = zeros(num_rows, num_columns);
+    
     for i = 1:num_columns
         x_normalized(:,i) = (2*(x(:,i)-min(x(:,i)))/(max(x(:,i))-min(x(:,i))))-1;
     end

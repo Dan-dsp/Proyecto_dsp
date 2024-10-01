@@ -34,8 +34,8 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','2205','44100','0','0', '0', '50000'};
-            answer = inputdlg(prompt,dlgtitle,dims,defect_input);
+            defect_input = {'1','4410','44100','0','0', '0', '50000'};
+            answer = inputdlg(prompt, dlgtitle, dims, defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
             Fa=str2num(answer{2}); % Frecuencia análoga
@@ -57,14 +57,14 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             t = n6*Ts; % Time vector en segundos dependiente del tiempo de muestreo
 
             variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
-            result = 2*pi*Fa/Fs+ Fase
-            x= A*[sin(2*pi*Fa*t + Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
+            result = 2*pi*Fa/Fs+ Fase;
+            x = A*[sin(2*pi*Fa*t + Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
 
             stem(axes, n6,x);
             % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
-            title(axes, 'Señal Estereofónica: Canal 1');
+            title(axes, 'Señal seno');
             xlabel(axes, 'n');
             grid(axes, 'on');
          case 'Coseno'
