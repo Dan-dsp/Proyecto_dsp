@@ -4,7 +4,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Chirp Signal Parameters';
             prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duración de la señal:'};
             dims = [1 35];
-            defect_input = {'1','100','22050','44100','2'};
+            defect_input = {'1','100','5000','44100','2'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
     
@@ -15,7 +15,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             T = str2num(answer{5});    % Duration of the signal in seconds
             
             t = 0:1/Fs:T;      % Time vector from 0 to T with steps of 1/Fs
-            x = chirp(t, f0, T, f1);
+            x = (chirp(t, f0, T, f1)).';
             
             % plot(app.UIAxes, app.x_in(:,1), 'v');
    
@@ -24,7 +24,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             
     
             stem(axes, t, x);
-            title(axes, 'Señal Estereofónica: Canal 1');
+            title(axes, 'Señal Chirp');
             xlabel(axes, 'n');
             grid(axes, 'on');
             
@@ -58,7 +58,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
 
             variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
             result = 2*pi*Fa/Fs+ Fase;
-            x = A*[sin(2*pi*Fa*t + Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
+            x = (A*[sin(2*pi*Fa*t + Fase)]).'; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
 
@@ -95,7 +95,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             n6=ni:nf; %Instantes de tiempo
             variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
             result = 2*pi*Fa/Fs+ Fase
-            x = A*[cos(2*pi*Fa*(n6-n0)/Fs+ Fase)]; %/(2*pi*Fa*(-55)/Fs+ Fase);
+            x = (A*[cos(2*pi*Fa*(n6-n0)/Fs+ Fase)]).'; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
             t = n6;
@@ -131,7 +131,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             n6=ni:nf; %Instantes de tiempo
             variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
             result = 2*pi*Fa/Fs+ Fase;
-            x = A * sawtooth(2 * pi * Fa * (n6 - n0) / Fs + Fase);
+            x = (A * sawtooth(2 * pi * Fa * (n6 - n0) / Fs + Fase)).';
             
             sample_rate = Fs;
             t = n6;
@@ -157,7 +157,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             Fs = str2num(answer{5});
             
             n3=ni:nf;  % Instantes de tiempo
-            x =A*(n3-n0);
+            x = (A*(n3-n0)).';
             
             sample_rate = Fs;
             t = n3;
@@ -181,7 +181,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             nf=str2num(answer{4});
             Fs = str2num(answer{5});
             
-            x= A*[zeros(1,abs(ni)+n0)  ones(1, abs(nf)+1-n0)  ];
+            x= (A*[zeros(1,abs(ni)+n0)  ones(1, abs(nf)+1-n0)]).';
             
             n2=ni:nf;  % Instantes de tiempo
             

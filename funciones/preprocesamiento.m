@@ -59,7 +59,7 @@ function [x_non_missing_values] = missing_values(x)
     
     % Loop through the input array to filter out missing values
     for i = 1:length(x)
-        if (x(i) ~= NaN) || (x(i) ~= Inf)
+        if (~isnan(x(i))) || (x(i) ~= Inf)
             % Append the non-missing value to the output array
             outputArray(i) = x(i);
             % Vector's length tracking

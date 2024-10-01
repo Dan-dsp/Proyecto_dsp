@@ -14,11 +14,10 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         case 'inversa'
             signal = invertir_senal(signal);
         case 'mono a estereo'
+            [signal_2, sample_rate_2] = import_signal();
             signal = stereo_from_mono(signal, signal_2, sample_rate);
         case 'estereo a mono'
-            a
-        case 'estereo con dos monos'
-            a
+            signal = mono_from_stereo(signal, sample_rate);
         case 'volumen del audio'
             a
     end
@@ -169,7 +168,7 @@ function [signal, sample_rate] = procesamiento_en_el_tiempo(tipo_de_procesamient
         % Average the left and right channels to create a mono signal
         % The mean function in this case create a mean value between the
         % two column-values for each line
-        mono_signal = mean(stereoSignal, 2);
+        mono_signal = mean(stereo_signal, 2);
     
         % Play the mono signal
         % sound(monoSignal, sample_rate); % Assuming 44100 Hz sample rate
