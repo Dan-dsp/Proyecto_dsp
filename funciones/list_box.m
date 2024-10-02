@@ -6,7 +6,7 @@ function [list_of_items, selected_item] = list_box(axes, signalsData,list_box_it
     % Encontrar el índice del ítem seleccionado
     % selectedSignalIndex = strcmp(list_box_items, selected_item);
     selected_signal_idex = find(strcmp(list_box_items, selected_item));
-    
+
     % Retrieve signal and sample rate
     signalData = signalsData{selected_signal_idex};  
 
@@ -16,11 +16,4 @@ function [list_of_items, selected_item] = list_box(axes, signalsData,list_box_it
     selected_number_of_points = (1:length(selected_signal));
 
     % graficar
-    stem(axes, selected_number_of_points, selected_signal);
-    title(axes, 'Selected signal');
-    xlabel(axes, 'n');
-    grid(axes, 'on');
-    
-    % Now you can do something with the selected signal and sample rate, like playing it
-    sound(selected_signal, selected_sample_rate);
 end
