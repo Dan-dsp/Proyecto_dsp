@@ -8,7 +8,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
     
-            A = str2num(answer{1});    % Amplitude of the chirp
+            A = str2num(answer{1});    % Amplitude of the chirpa
             f0 = str2num(answer{2});    % Initial frequency in Hz
             f1 = str2num(answer{3});    % Final frequency in Hz
             Fs = str2num(answer{4});    % Sampling frequency in Hz
