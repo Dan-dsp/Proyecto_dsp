@@ -1,18 +1,33 @@
-   function FiltrarButtonPushed(app, event)
+function [filtrada,t,datain,freqmuestreoin] = Filtrar(entrada,selectedItem,graficain,signalsData,windowsize)
                      
-            selectedItem = app.SealdeentradaDropDown.Value;
+            
 
             % Encontrar el índice del ítem seleccionado
-            selectedSignalIndex = find(strcmp(app.SealdeentradaDropDown.Items, selectedItem));
-            signalData = app.signalsData{selectedSignalIndex};  % Retrieve signal and sample rate
-            app.datain = signalData{1};
-            app.freqmuestreoin = signalData{2};
+            selectedSignalIndex = find(strcmp(entrada, selectedItem));
+            signalData = signalsData{selectedSignalIndex};  % Retrieve signal and sample rate
+            datain = signalData{1};
+            freqmuestreoin = signalData{2};
            
               
             t= 0:1/signalData{2}:(length(signalData{1})-1)/signalData{2};%vector de tiempos para graficar
-            plot(app.UIAxes3_2, t, signalData{1});
-            ventana = app.TamaodelaventanaSpinner.Value;
+            plot(graficain, t, signalData{1});
+            ventana = windowsize;
             
+
+    selectedButton = app.FilterButtonGroup.SelectedObject;
+    
+    switch selectedButton.Text
+        case 'FIR1'
+            % Código para aplicar FIR1
+        case 'FIR2'
+            % Código para aplicar FIR2
+        case 'FIR3'
+            % Código para aplicar FIR3
+        case 'IIR1'
+            % Código para aplicar IIR1
+    end
+
+
             
             if app.FIR1Button.Value
                     h= transpose (readmatrix('Filtros_Prueba_Proyecto1_Entregable.xlsx', 'Sheet','Filtro FIR 1'));
