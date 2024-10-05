@@ -12,9 +12,12 @@ function [prosig, prosigFs] = eco(datain, freqin)
 
     % Asegurarse de que datain sea un vector columna
     x = datain(:);
-
+    
+    length_x = length(x);
+    disp(class(length_x));
+    disp(class(freqin));
     % Generar la señal con eco
-    y = zeros(length(x) + k3, 1);  % Inicializar la señal de salida con ceros para incluir el retardo máximo
+    y = zeros(length_x + k3, 1);  % Inicializar la señal de salida con ceros para incluir el retardo máximo
     y(1:length(x)) = x;  % Copiar la señal original
 
     % Añadir los ecos de manera segura
