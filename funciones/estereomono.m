@@ -1,6 +1,6 @@
 function [prosig,prosigFs] = estereomono(Fs1,Fs2,signal1,signal2,axes)
 if Fs2<Fs1
-                nf = freqint(Fs1,signal1,Fs2); %señal cambjada
+                nf = freqint(Fs1,signal1,Fs2); %señal cambiada
                 newfreq = transpose(nf);
                 lnf = length(newfreq);
                 lns2 = length(signal2);
