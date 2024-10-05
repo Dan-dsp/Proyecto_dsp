@@ -1,4 +1,4 @@
-function [prosig, prosigFs] = monoestereo   (datain1, frecuenciademuestreoin1, datain2, frecuenciademuestreoin2)
+function [prosig, prosigFs] = monoestereo(datain1, frecuenciademuestreoin1, datain2, frecuenciademuestreoin2)
     % Verificar que las se�ales sean vectores columna
     datain1 = datain1(:);
     datain2 = datain2(:);
@@ -35,5 +35,6 @@ function [prosig, prosigFs] = monoestereo   (datain1, frecuenciademuestreoin1, d
 
     % Reproducir la se�al est�reo resultante
     sound(prosig, prosigFs);
+    disp(['Size of the signal ', num2str(size(prosig))]);
 
 end
