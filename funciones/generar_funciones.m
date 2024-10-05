@@ -8,7 +8,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
     
-            A = str2num(answer{1});    % Amplitude of the chirpa
+            A = str2num(answer{1});    % Amplitude of the chirp
             f0 = str2num(answer{2});    % Initial frequency in Hz
             f1 = str2num(answer{3});    % Final frequency in Hz
             Fs = str2num(answer{4});    % Sampling frequency in Hz
@@ -56,9 +56,9 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             
             t = n6*Ts; % Time vector en segundos dependiente del tiempo de muestreo
 
-            variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
-            result = 2*pi*Fa/Fs+ Fase;
-            x = (A*[sin(2*pi*Fa*t + Fase)]).'; %/(2*pi*Fa*(-55)/Fs+ Fase);
+            % variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
+            % result = 2*pi*Fa/Fs+ Fase;
+            x = (A*[sin(2*pi*Fa*(n6-n0)/Fs + Fase)]).'; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
 
@@ -93,8 +93,8 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
 
             
             n6=ni:nf; %Instantes de tiempo
-            variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
-            result = 2*pi*Fa/Fs+ Fase
+            % variable = (2*pi*Fa*(n6-n0)/Fs+ Fase);
+            % result = 2*pi*Fa/Fs+ Fase
             x = (A*[cos(2*pi*Fa*(n6-n0)/Fs+ Fase)]).'; %/(2*pi*Fa*(-55)/Fs+ Fase);
             
             sample_rate = Fs;
