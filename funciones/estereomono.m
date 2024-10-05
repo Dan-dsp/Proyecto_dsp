@@ -1,39 +1,48 @@
-function [prosig,prosigFs] = estereomono(axes, signal1, Fs1, signal2, Fs2)
-    if Fs2<Fs1
-        nf = freqint(Fs1, signal1, Fs2); %señal cambiada
-        newfreq = transpose(nf);
-        lnf = length(newfreq);
+function [prosig, prosigFs] = estereomono(signal1, Fs1, signal2, Fs2)
+    % Esta función combina dos señales estéreo en una señal mono.
+    % Si las frecuencias de muestreo son diferentes, una de las señales es
+    % interpolada internamente para que ambas tengan la misma frecuencia de muestreo.
+    
+    % Verificar si las frecuencias de muestreo son diferentes
+    if Fs2 < Fs1
+        % Interpolar la señal1 a la frecuencia de muestreo de la señal2
+        oldfreq = 0:(1/Fs1):(length(signal1) - 1) / Fs1;
+        newfreq = 0:(1/Fs2):(length(signal1) - 1) / Fs1;
+        newSignal1 = interp1(oldfreq, signal1, newfreq);  % Interpolación directa
+        newSignal1 = transpose(newSignal1);  % Transponer para mantener consistencia
+        lnf = length(newSignal1);
         lns2 = length(signal2);
-        prosigFs = Fs2;
-        if lnf>lns2
-            lnss = lnf-lns2;
-            signal2 = [signal2 zeros(1,lnss)];
-            
+        prosigFs = Fs2;  % Nueva frecuencia de muestreo será la más baja
+        
+        % Ajustar longitudes de las señales si es necesario
+        if lnf > lns2
+            signal2 = [signal2, zeros(1, lnf - lns2)];
         else
-             lnss = lns2-lnf;
-            newfreq = [newfreq zeros(1,lnss)];
-            
+            newSignal1 = [newSignal1, zeros(1, lns2 - lnf)];
         end
-        prosig = signal2*0.5 + newfreq*0.5; 
+        
+        % Combinar las dos señales en una señal mono
+        prosig = (signal2 * 0.5) + (newSignal1 * 0.5);
     else
-        nf = freqint(Fs2, signal2, Fs1); %señal cambjada
-        newfreq = transpose(nf);
-        lnf = length(newfreq);
+        % Interpolar la señal2 a la frecuencia de muestreo de la señal1
+        oldfreq = 0:(1/Fs2):(length(signal2) - 1) / Fs2;
+        newfreq = 0:(1/Fs1):(length(signal2) - 1) / Fs2;
+        newSignal2 = interp1(oldfreq, signal2, newfreq);  % Interpolación directa
+        newSignal2 = transpose(newSignal2);  % Transponer para mantener consistencia
+        lnf = length(newSignal2);
         lns1 = length(signal1);
-        prosigFs = Fs1;
-        if lnf>lns1
-            lnss = lnf-lns1;
-            signal1 = [signal1 zeros(1,lnss)];
-            
+        prosigFs = Fs1;  % Nueva frecuencia de muestreo será la más baja
+        
+        % Ajustar longitudes de las señales si es necesario
+        if lnf > lns1
+            signal1 = [signal1, zeros(1, lnf - lns1)];
         else
-             lnss = lns1-lnf;
-            newfreq = [newfreq zeros(1,lnss)];
-            
+            newSignal2 = [newSignal2, zeros(1, lns1 - lnf)];
         end
-     
-        prosig = signal1*0.5 + newfreq*0.5;
+        
+        % Combinar las dos señales en una señal mono
+        prosig = (signal1 * 0.5) + (newSignal2 * 0.5);
     end
-    disp(size(prosig))
-    plot(axes,prosig)
-            
+    sound(prosig, prosigFs);
+
 end
