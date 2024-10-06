@@ -4,7 +4,7 @@ function [prosig,prosigFs] = adicionButtonPushed(Fs1,Fs2,signal1,signal2)
 
     
             if Fs2<Fs1
-                nf = interpolacionfrecuencial(Fs1,signal1,Fs2); %señal cambiada
+                nf = interpolacionfrecuencial(app, Fs1,signal1,Fs2); %señal cambiada
                 newfreq = transpose(nf);
                 lnf = length(newfreq);
                 lns2 = length(signal2);
@@ -20,7 +20,7 @@ function [prosig,prosigFs] = adicionButtonPushed(Fs1,Fs2,signal1,signal2)
                 end
                 prosig = signal2 + newfreq; 
             else
-                nf = interpolacionfrecuencial(Fs2,signal2,Fs1); %señal cambiada
+                nf = interpolacionfrecuencial(app, Fs2,signal2,Fs1); %señal cambiada
                 newfreq = transpose(nf);
                 lnf = length(newfreq);
                 lns1 = length(signal1);
