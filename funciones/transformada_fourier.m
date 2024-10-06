@@ -1,18 +1,30 @@
-% La señal de entrada debe ser un vector, normalizado
-% Esta funcion devuelve los valores de frecuencia su magnitud y fase
-% correspondientes 
-% debe escogerse una frecuencia de muestreo normalmente el doble de la
-% frecuencia de de la señal 
-
-function [fVals, magnitude, phase] = transformada_fourier(signal, fs)
-    % signal: La señal de entrada (vector)
-    % fs: Frecuencia de muestreo (escalares)
-
+function [fVals, magnitude, phase] = transformada_fourier(signal, fs, MagnitudeAxes, PhaseAxes)
     N = length(signal);        % Número de puntos de la señal
     fftSignal = fft(signal);   % Calcular la FFT
-    fVals = (0:N-1)*(fs/N);    % Eje de frecuencias
 
-    % Magnitud y Fase
-    magnitude = abs(fftSignal); % Magnitud de la FFT
-    phase = angle(fftSignal);   % Fase de la FFT
+    % Tomar sólo la primera mitad de la FFT (debido a la simetría)
+    fftSignal = fftSignal(1:N/2+1);
+    
+    % Eje de frecuencias
+    fVals = (0:N/2)*(fs/N);
+
+    % Magnitud escalada
+    magnitude = abs(fftSignal)/N;
+    magnitude(2:end-1) = 2*magnitude(2:end-1); % Escalar las magnitudes (excepto DC)
+
+    % Fase
+    phase = angle(fftSignal);
+
+
+    % Graficar la magnitud en el objeto Axes correspondiente
+    plot(MagnitudeAxes, fVals, magnitude);
+    title(MagnitudeAxes, 'Magnitud de la Transformada de Fourier');
+    xlabel(MagnitudeAxes, 'Frecuencia (Hz)');
+    ylabel(MagnitudeAxes, 'Magnitud');
+
+    % Graficar la fase en el objeto Axes correspondiente
+    plot(PhaseAxes, fVals, phase);
+    title(PhaseAxes, 'Fase de la Transformada de Fourier');
+    xlabel(PhaseAxes, 'Frecuencia (Hz)');
+    ylabel(PhaseAxes, 'Fase (radianes)');
 end

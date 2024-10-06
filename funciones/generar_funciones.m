@@ -2,7 +2,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
     switch value
         case 'Chirp'
             dlgtitle = 'Chirp Signal Parameters';
-            prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duración de la señal:'};
+            prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duraci�n de la se�al:'};
             dims = [1 35];
             defect_input = {'1','100','500','44100','2'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
@@ -24,31 +24,28 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             
     
             stem(axes, t, x);
-            title(axes, 'Señal Chirp');
+            title(axes, 'Se�al Chirp');
             xlabel(axes, 'n');
             grid(axes, 'on');
             
     
          case 'Seno'
-            disp('Se seleccionó la Seno');
             dlgtitle = 'Sine Signal Parameters';
-            prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
+            prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
             defect_input = {'1','100','44100','0','0', '0', '44100'};
             answer = inputdlg(prompt, dlgtitle, dims, defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
-            Fa=str2num(answer{2}); % Frecuencia análoga
+            Fa=str2num(answer{2}); % Frecuencia an�loga
             Fs=str2num(answer{3}); % Frecuencia de muestreo
             
-            Fase=str2num(answer{4}); % Fase de la señal análoga (Rad)
+            Fase=str2num(answer{4}); % Fase de la se�al an�loga (Rad)
             
             n0=str2num(answer{5});
             ni=str2num(answer{6});
             nf=str2num(answer{7});
             
-            % disp(answer{1});
-            % disp(answer{6});
             
             Ts=1/Fs; %Periodo de muestreo
             
@@ -63,31 +60,29 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             sample_rate = Fs;
 
             stem(axes, n6,x);
-            % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
-            title(axes, 'Señal seno');
+            % xlabel('n'); ylabel('x(n)'); title(['Se�al Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
+            title(axes, 'Se�al seno');
             xlabel(axes, 'n');
             grid(axes, 'on');
          case 'Coseno'
-            disp('Se seleccionó la Coseno');
-            % Agregar código para manejar la selección de Opción 1
+            % Agregar c�digo para manejar la selecci�n de Opci�n 1
             dlgtitle = 'Sine Signal Parameters';
-            prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
+            prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
             defect_input = {'1','100','44100','0','0', '0', '44100'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
-            Fa=str2num(answer{2}); % Frecuencia análoga
+            Fa=str2num(answer{2}); % Frecuencia an�loga
             Fs=str2num(answer{3}); % Frecuencia de muestreo
             
-            Fase=str2num(answer{4}); % Fase de la señal análoga (Rad)
+            Fase=str2num(answer{4}); % Fase de la se�al an�loga (Rad)
             
             n0=str2num(answer{5});
             ni=str2num(answer{6});
             nf=str2num(answer{7});
             
-            % disp(answer{1});
-            % disp(answer{6});
+
             
             Ts=1/Fs; %Periodo de muestreo
 
@@ -101,30 +96,27 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             t = n6;
 
             stem(axes, t,x);
-            title(axes, 'Señal Estereofónica: Canal 1');
+            title(axes, 'Se�al Estereof�nica: Canal 1');
             xlabel(axes, 'n');
             grid(axes, 'on');
          case 'Diente de sierra'
-            disp('Se seleccionó la Diente de sierra');
-            % Agregar código para manejar la selección de Opción 1
+            % Agregar c�digo para manejar la selecci�n de Opci�n 1
             dlgtitle = 'Sine Signal Parameters';
-            prompt = {'Ganancia:','Frecuencia Análoga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
+            prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
             defect_input = {'1','100','44100','0','0', '0', '44100'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
-            Fa=str2num(answer{2}); % Frecuencia análoga
+            Fa=str2num(answer{2}); % Frecuencia an�loga
             Fs=str2num(answer{3}); % Frecuencia de muestreo
             
-            Fase=str2num(answer{4}); % Fase de la señal análoga (Rad)
+            Fase=str2num(answer{4}); % Fase de la se�al an�loga (Rad)
             
             n0=str2num(answer{5});
             ni=str2num(answer{6});
             nf=str2num(answer{7});
             
-            % disp(answer{1});
-            % disp(answer{6});
             
             Ts=1/Fs; %Periodo de muestreo
             
@@ -143,7 +135,6 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             
             
          case 'Rampa'
-            disp('Se seleccionó la Rampa');
             dlgtitle = 'Ramp Signal Parameters';
             prompt = {'Pendiente:','Desplazamiento','n_inicio:','n_final:', 'Frecuencia Muestreo:'};
             dims = [1 35];
@@ -163,12 +154,11 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             t = n3;
             
             stem(axes, n3,x);
-            % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
+            % xlabel('n'); ylabel('x(n)'); title(['Se�al Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
             title(axes, 'Rampa');
             xlabel(axes, 'n');
             grid(axes, 'on');
-         case 'Escalón'
-            disp('Se seleccionó la Escalón');
+         case 'Escal�n'
             dlgtitle = 'Step Signal Parameters';
             prompt = {'Amplitud:','Desplazamiento','n_inicio:','n_final:', 'Frecuencia Muestreo:'};
             dims = [1 35];
@@ -189,11 +179,10 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             t = n2;
         
             stem(axes, n2,x);
-            % xlabel('n'); ylabel('x(n)'); title(['Señal Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
-            title(axes, 'Señal Estereofónica: Canal 1');
+            % xlabel('n'); ylabel('x(n)'); title(['Se�al Senoidal, Fa=' num2str(Fa) ' Fs= ' num2str(Fs)]);grid on
+            title(axes, 'Se�al Estereof�nica: Canal 1');
             xlabel(axes, 'n');
             grid(axes, 'on');
     end
-    % disp(['Sample rate:', num2str(Fs), 'Hz']);
 end
 
