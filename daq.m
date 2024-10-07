@@ -1,5 +1,5 @@
 % Button pushed function: DAQButton
-function daq(app)
+function [app_fs1, app_inx1, app_iny1] = daq(app_SampleNumberEditField_Value)
     % Reset the DAQ devices configuration
     daqreset;
     dev = daqlist; % Get the list of connected DAQ devices
@@ -44,7 +44,7 @@ function daq(app)
 
             % Configure the DAQ device
             d = daq(selectedVendor);
-            d.Rate = app.SampleNumberEditField.Value; % Assume this value is set correctly in the app
+            d.Rate = app_SampleNumberEditField_Value; % Assume this value is set correctly in the app
             % Note: 'app.fs' seems to be unused, consider removing it if not needed
 
             % Add input channel
@@ -54,25 +54,37 @@ function daq(app)
             % Start reading the data
             data = read(d, seconds(captureTime));
 
-            %% NOTE: Assumes 'app.Switch' is a UI element that determines the plot target
-            switch app.Switch.Value
-                case 'Input 1'
-                    app.fs1 = d.Rate;
-                    app.inx1 = data.Time';
-                    app.iny1 = data.Variables';
-                    stem(app.input1, app.inx1, app.iny1);
-                    title(app.input1, 'Input 1 Data');
-                    xlabel(app.input1, 'Time (s)');
-                    ylabel(app.input1, 'Voltage (V)');
-                case 'Input 2'
-                    app.fs2 = d.Rate;
-                    app.inx2 = data.Time';
-                    app.iny2 = data.Variables';
-                    stem(app.input2, app.inx2, app.iny2);
-                    title(app.input2, 'Input 2 Data');
-                    xlabel(app.input2, 'Time (s)');
-                    ylabel(app.input2, 'Voltage (V)');
-            end
+            app_fs1 = d.Rate;
+            app_inx1 = data.Time';
+            app_iny1 = data.Variables';
+
+            disp(['app_fs1 ', num2str(app_fs1)]);
+            disp(['app_inx1 ', num2str(app_inx1)]);
+            disp(['app_iny1 ', num2str(app_iny1)]);
+
+            % , app_Switch_Value
+            
+            % , app_input1, app_fs2, app_inx2, app_iny2
+
+            % %% NOTE: Assumes 'app.Switch' is a UI element that determines the plot target
+            % switch app_Switch_Value
+            %     case 'Input 1'
+            %         app_fs1 = d.Rate;
+            %         app_inx1 = data.Time';
+            %         app_iny1 = data.Variables';
+            %         stem(axes_1, app.inx1, app.iny1);
+            %         title(app.input1, 'Input 1 Data');
+            %         xlabel(app.input1, 'Time (s)');
+            %         ylabel(app.input1, 'Voltage (V)');
+            %     case 'Input 2'
+            %         app_fs2 = d.Rate;
+            %         app_inx2 = data.Time';
+            %         app_iny2 = data.Variables';
+            %         stem(app.input2, app.inx2, app.iny2);
+            %         title(app.input2, 'Input 2 Data');
+            %         xlabel(app.input2, 'Time (s)');
+            %         ylabel(app.input2, 'Voltage (V)');
+            % end
         end
     end
 end
