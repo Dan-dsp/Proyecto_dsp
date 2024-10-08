@@ -21,7 +21,7 @@ function [signal, sample_rate, app_list_box_items, app_num_signals, app_Sealdeen
             app_DropDown_Items{app_num_signals} = signalName;
         case 'grabada'
             app_num_grabaciones = app_num_grabaciones + 1;
-            signalName = ['Grabaci�n', num2str(app_num_grabaciones)];  % Name the signal (e.g., "Signal 1", "Signal 2")
+            signalName = ['Record', num2str(app_num_grabaciones)];  % Name the signal (e.g., "Signal 1", "Signal 2")
             app_list_box_items{app_num_signals} = signalName;     % Add to the List Box
             app_SealdeentradaDropDown_Items{app_num_signals} = signalName;  %Add to the Input Signal Dropdown Button
             app_Sealdeentrada1DropDown_Items{app_num_signals} = signalName;
