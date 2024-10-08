@@ -4,7 +4,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Chirp Signal Parameters';
             prompt = {'Amplitud:','Frecuencia inicial:','Frecuencia final:', 'Frecuencia de muestreo:' ,'Duraci�n de la se�al:'};
             dims = [1 35];
-            defect_input = {'1','100','500','44100','2'};
+            defect_input = {'1','10','20000','44100','2'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
     
@@ -33,7 +33,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','100','44100','0','0', '0', '44100'};
+            defect_input = {'1','100','44100','0','0', '0', '11025'};
             answer = inputdlg(prompt, dlgtitle, dims, defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
@@ -69,7 +69,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','100','44100','0','0', '0', '44100'};
+            defect_input = {'1','100','44100','0','0', '0', '11025'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial
@@ -104,7 +104,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             dlgtitle = 'Sine Signal Parameters';
             prompt = {'Ganancia:','Frecuencia An�loga:','Frecuencia Muestreo:', 'Fase (rad)' ,'Desplazamiento:','n_inicio:','n_final:' };
             dims = [1 35];
-            defect_input = {'1','100','44100','0','0', '0', '44100'};
+            defect_input = {'1','100','44100','0','0', '0', '11025'};
             answer = inputdlg(prompt,dlgtitle,dims,defect_input);
             
             A=str2num(answer{1}); % Ganancia de la exponencial

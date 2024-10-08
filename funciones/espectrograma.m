@@ -1,4 +1,4 @@
-function espectrograma(signal, fs, SpectrogramAxes)
+function espectrograma(signal, fs, SpectrogramAxes, title_1)
     % ESPECTROGRAMA Plots the spectrogram of a signal on a specified Axes.
     % signal: La señal de entrada (vector)
     % fs: Frecuencia de muestreo
@@ -19,7 +19,7 @@ function espectrograma(signal, fs, SpectrogramAxes)
     view(SpectrogramAxes, 0, 90);
     xlabel(SpectrogramAxes, 'Tiempo (s)');
     ylabel(SpectrogramAxes, 'Frecuencia (Hz)');
-    title(SpectrogramAxes, 'Espectrograma de la Señal');
+    title(SpectrogramAxes, title_1);
     colorbar(SpectrogramAxes);
     ylabel(SpectrogramAxes.Colorbar, 'Potencia/Frecuencia (dB/Hz)');
 end

@@ -1,4 +1,4 @@
-function [prosig,prosigFs] = Ajustevolumen(datain, Fsin, potenciometro, modo)
+function [prosig, prosigFs] = Ajustevolumen(datain, Fsin, potenciometro, modo)
     % Normalización del valor del potenciometro
     volume = potenciometro / 100;
     
@@ -28,6 +28,8 @@ function [prosig,prosigFs] = Ajustevolumen(datain, Fsin, potenciometro, modo)
         
         % Aplicar ajuste de volumen a la señal
         prosig = datain .* volm;
-        prosigFs = Fsin;
     end
+    
+    % Asignar la frecuencia de muestreo en todos los casos
+    prosigFs = Fsin;
 end
