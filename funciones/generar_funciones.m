@@ -158,7 +158,7 @@ function  [x, t, sample_rate] = generar_funciones(axes, value)
             title(axes, 'Rampa');
             xlabel(axes, 'n');
             grid(axes, 'on');
-         case 'Escal�n'
+         case 'Escalon'
             dlgtitle = 'Step Signal Parameters';
             prompt = {'Amplitud:','Desplazamiento','n_inicio:','n_final:', 'Frecuencia Muestreo:'};
             dims = [1 35];
